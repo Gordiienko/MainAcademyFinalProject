@@ -1,0 +1,22 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Demo presta shop tests">
+
+    <listeners>
+        <listener class-name="core.MyTestListener"/>
+    </listeners>
+
+    <test name="Valid info text test">
+        <classes>
+            <class name="prestaShopTests.CheckingForValidTextInformationTest"/>
+            <class name="prestaShopTests.CheckLanguagesTest"/>
+        </classes>
+    </test>
+
+    <test name="Registration account test">
+        <classes>
+            <class name="prestaShopTests.RegistrationAccountTest"/>
+        </classes>
+    </test>
+
+</suite>
