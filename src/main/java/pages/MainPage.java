@@ -17,6 +17,34 @@ public class MainPage extends BasePage {
     private final By languageButton = By.xpath("//span[@class=\"expand-more\"]");
     private final By ukraineLanguageLocator = By.xpath("//a[@data-iso-code=\"uk\"]");
     private final By signInButton = By.xpath("//span[text()=\"Sign in\"]");
+    private final By closesMenu = By.id("category-3");
+    private final By accessoriesMenu = By.id("category-6");
+    private final By artMenu = By.id("category-9");
+    private final By subCategoryMenu = By.className("popover");
+
+    @Step("")
+    public void openClothesCategory() {
+        WebElement webElement = find(frameLive);
+        switchToIframe(webElement);
+        waitUntilElementPresence(closesMenu, 10);
+        hoverMouse(closesMenu);
+    }
+    public void openArtCategory(){
+        waitUntilVisible(artMenu,15);
+        hoverMouse(artMenu);
+    }
+    public void openAccessoriesCategory() {
+        waitUntilVisible(accessoriesMenu,15);
+        hoverMouse(accessoriesMenu);
+    }
+
+    public boolean categoryIsDisplayed(String category) {
+        return waitUntilVisible(By.xpath(String.format("//a[contains(text(),'%s')]", category)), 10).isDisplayed();
+    }
+
+    public boolean subCategoryIsDisplayed(){
+        return find(subCategoryMenu).isDisplayed();
+    }
 
     @Step("Click on [sign in] button")
     public void clickOnSignInButton() {
