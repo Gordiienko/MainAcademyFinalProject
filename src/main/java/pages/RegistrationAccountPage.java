@@ -2,7 +2,7 @@ package pages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-import users.User;
+import models.UserModel;
 
 public class RegistrationAccountPage extends BasePage {
 
@@ -40,22 +40,22 @@ public class RegistrationAccountPage extends BasePage {
     }
 
     @Step("Enter registration date {user.}")
-    public RegistrationAccountPage fillRegistrationForm(User user) {
-        find(firstNameField).sendKeys(user.getUserFirstName());
-        find(lastNameField).sendKeys(user.getUserLastName());
-        find(emailField).sendKeys(user.getUserEmail());
-        find(passwordField).sendKeys(user.getUserPassword());
-        find(birthdateField).sendKeys(user.getUserBirthday());
+    public RegistrationAccountPage fillRegistrationForm(UserModel userModel) {
+        find(firstNameField).sendKeys(userModel.getUserFirstName());
+        find(lastNameField).sendKeys(userModel.getUserLastName());
+        find(emailField).sendKeys(userModel.getUserEmail());
+        find(passwordField).sendKeys(userModel.getUserPassword());
+        find(birthdateField).sendKeys(userModel.getUserBirthday());
         return this;
     }
 
     @Step("Enter registration date {user}")
-    public RegistrationAccountPage fillRegistrationFormWithInvalidFirstName(User user) {
+    public RegistrationAccountPage fillRegistrationFormWithInvalidFirstName(UserModel userModel) {
         find(firstNameField).sendKeys("James8");
-        find(lastNameField).sendKeys(user.getUserLastName());
-        find(emailField).sendKeys(user.getUserEmail());
-        find(passwordField).sendKeys(user.getUserPassword());
-        find(birthdateField).sendKeys(user.getUserBirthday());
+        find(lastNameField).sendKeys(userModel.getUserLastName());
+        find(emailField).sendKeys(userModel.getUserEmail());
+        find(passwordField).sendKeys(userModel.getUserPassword());
+        find(birthdateField).sendKeys(userModel.getUserBirthday());
         return this;
 
     }

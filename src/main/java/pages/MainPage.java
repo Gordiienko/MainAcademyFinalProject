@@ -1,9 +1,11 @@
 package pages;
 
 import io.qameta.allure.Step;
+import models.ProductModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,6 +23,35 @@ public class MainPage extends BasePage {
     private final By accessoriesMenu = By.id("category-6");
     private final By artMenu = By.id("category-9");
     private final By subCategoryMenu = By.className("popover");
+    private final By productContainer = By.xpath("//article[contains(@class,'product-miniature')]");
+    private final By priceDropLink = By.id("link-product-page-prices-drop-1");
+private final By allProductsLink = By.xpath("//a[contains(text(),'All products')]");
+
+    public AllProductsPage clickOnAllProductsLink(){
+        WebElement webElement = find(frameLive);
+        switchToIframe(webElement);
+        waitUntilElementClickable(allProductsLink,10).click();
+        return new AllProductsPage();
+    }
+    public PriceDropPage clickOnPriceDropLink(){
+        WebElement webElement = find(frameLive);
+        switchToIframe(webElement);
+        waitUntilElementPresence(priceDropLink, 10).click();
+        return new PriceDropPage();
+    }
+
+    public List<ProductModel> getProductsFromProductsSection() {
+        WebElement webElement = find(frameLive);
+        switchToIframe(webElement);
+        waitUntilElementPresence(productContainer, 10);
+        List<ProductModel> products = new ArrayList<>();
+        List<WebElement> containers = findAll(productContainer);
+        for (WebElement container : containers) {
+            ProductModel productModel = new ProductModel(container);
+            products.add(productModel);
+        }
+        return products;
+    }
 
     @Step("")
     public void openClothesCategory() {
@@ -29,12 +60,14 @@ public class MainPage extends BasePage {
         waitUntilElementPresence(closesMenu, 10);
         hoverMouse(closesMenu);
     }
-    public void openArtCategory(){
-        waitUntilVisible(artMenu,15);
+
+    public void openArtCategory() {
+        waitUntilVisible(artMenu, 15);
         hoverMouse(artMenu);
     }
+
     public void openAccessoriesCategory() {
-        waitUntilVisible(accessoriesMenu,15);
+        waitUntilVisible(accessoriesMenu, 15);
         hoverMouse(accessoriesMenu);
     }
 
@@ -42,7 +75,7 @@ public class MainPage extends BasePage {
         return waitUntilVisible(By.xpath(String.format("//a[contains(text(),'%s')]", category)), 10).isDisplayed();
     }
 
-    public boolean subCategoryIsDisplayed(){
+    public boolean subCategoryIsDisplayed() {
         return find(subCategoryMenu).isDisplayed();
     }
 

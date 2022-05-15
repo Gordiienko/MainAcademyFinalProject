@@ -42,7 +42,6 @@ public void switchToIframe(WebElement webElement){
                 .until(ExpectedConditions.elementToBeClickable(locator));
     }
 
-
     public WebElement find(By locator) {
         return getDriver().findElement(locator);
     }

@@ -1,15 +1,15 @@
 package prestaShopTests;
 
+import models.UserModel;
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 import pages.AccountPage;
 import pages.LoginAccountPage;
 import pages.MainPage;
 import pages.RegistrationAccountPage;
-import users.User;
 
 public class RegistrationAccountTest extends BaseTest {
-    User user = new User();
+    UserModel userModel = new UserModel();
     MainPage mainPage = new MainPage();
     AccountPage accountPage = new AccountPage();
     LoginAccountPage loginAccountPage = new LoginAccountPage();
@@ -20,11 +20,11 @@ public class RegistrationAccountTest extends BaseTest {
         mainPage.clickOnSignInButton();
         loginAccountPage.clickCreateAccountLink();
         registrationAccountPage.clickOnSocialTitleMr();
-        registrationAccountPage.fillRegistrationForm(user)
+        registrationAccountPage.fillRegistrationForm(userModel)
                 .clickOnCustomerPrivacyIcon();
         registrationAccountPage.clickOnSaveButton();
 
-        Assertions.assertThat(user.getUserFirstName() + " " + user.getUserLastName())
+        Assertions.assertThat(userModel.getUserFirstName() + " " + userModel.getUserLastName())
                 .isEqualTo(accountPage.checkThatAccountNameAppear());
     }
 
@@ -35,7 +35,7 @@ public class RegistrationAccountTest extends BaseTest {
         mainPage.clickOnSignInButton();
         loginAccountPage.clickCreateAccountLink();
         registrationAccountPage.clickOnSocialTitleMr();
-        registrationAccountPage.fillRegistrationFormWithInvalidFirstName(user)
+        registrationAccountPage.fillRegistrationFormWithInvalidFirstName(userModel)
                 .clickOnCustomerPrivacyIcon();
         registrationAccountPage.clickOnSaveButton();
         Assertions.assertThat(registrationAccountPage.getFirstNameColor())
