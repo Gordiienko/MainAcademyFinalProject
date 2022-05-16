@@ -8,8 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PriceDropPage extends BasePage {
-    private final By productContainerFromPriceDropPage = By.xpath("//article[contains(@class,'product-miniature')]");
-
+    private final By productContainerFromPriceDropPage = By.className("reviews-loaded");
 
     public List<PriceOfDropProductModel> getProductsFromPriceDropPage() {
         waitUntilElementPresence(productContainerFromPriceDropPage, 10);

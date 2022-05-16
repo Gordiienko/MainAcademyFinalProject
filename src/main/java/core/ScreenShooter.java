@@ -5,7 +5,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import pages.BasePage;
 
-public class ScreenShoter {
+public class ScreenShooter {
     @Attachment(value = "{fileName}", type = "image/png")
     public static byte[] takeScreenShot(String fileName) {
         return ((TakesScreenshot) BasePage.getDriver()).getScreenshotAs(OutputType.BYTES);

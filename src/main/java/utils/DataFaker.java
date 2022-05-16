@@ -1,6 +1,7 @@
 package utils;
 
 import com.github.javafaker.Faker;
+
 import java.text.SimpleDateFormat;
 
 public class DataFaker {

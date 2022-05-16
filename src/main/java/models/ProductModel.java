@@ -15,9 +15,5 @@ public class ProductModel {
         this.price = container.findElement(By.xpath(".//div//span[@class=\"price\"]")).getText();
     }
 
-    public Double getPriceValue() {
-        return Double.valueOf(this.getPrice().replace("€", ""));
-    }
-
 
 }

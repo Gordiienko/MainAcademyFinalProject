@@ -11,6 +11,7 @@ public class CheckLanguagesTest extends BaseTest {
     public void checkHowMuchLanguagesInDropDownMenu() {
         MainPage mainPage = new MainPage();
         String exceptedLanguageResult = "Українська";
+        mainPage.openMainPage();
         mainPage.clickOnLanguageButton();
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(mainPage.getAllLanguageFromDropDownMenu().size())

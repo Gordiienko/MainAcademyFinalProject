@@ -2,6 +2,7 @@ package prestaShopTests;
 
 import models.UserModel;
 import org.assertj.core.api.Assertions;
+import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 import pages.AccountPage;
 import pages.LoginAccountPage;
@@ -17,6 +18,7 @@ public class RegistrationAccountTest extends BaseTest {
 
     @Test(description = "Create new account with valid date")
     public void createNewAccountWithValidDate() {
+        mainPage.openMainPage();
         mainPage.clickOnSignInButton();
         loginAccountPage.clickCreateAccountLink();
         registrationAccountPage.clickOnSocialTitleMr();
@@ -32,16 +34,19 @@ public class RegistrationAccountTest extends BaseTest {
     public void createNewAccountWithInvalidFirstName() {
         String exceptedColorOfFirstNameField = "rgba(255, 76, 76, 1)";
         String textFromPopUpUnderFieldFirstName = "Invalid name";
+        SoftAssertions softAssertions = new SoftAssertions();
+        mainPage.openMainPage();
         mainPage.clickOnSignInButton();
         loginAccountPage.clickCreateAccountLink();
         registrationAccountPage.clickOnSocialTitleMr();
         registrationAccountPage.fillRegistrationFormWithInvalidFirstName(userModel)
                 .clickOnCustomerPrivacyIcon();
         registrationAccountPage.clickOnSaveButton();
-        Assertions.assertThat(registrationAccountPage.getFirstNameColor())
+        softAssertions.assertThat(registrationAccountPage.getFirstNameColor())
                 .as("Color of First Name field must be: red").isEqualTo(exceptedColorOfFirstNameField);
-        Assertions.assertThat(registrationAccountPage.getTextFromPopUpUnderField())
+        softAssertions.assertThat(registrationAccountPage.getTextFromPopUpUnderField())
                 .as("Text in pop-up must be: Invalid name")
                 .isEqualTo(textFromPopUpUnderFieldFirstName);
+        softAssertions.assertAll();
     }
 }

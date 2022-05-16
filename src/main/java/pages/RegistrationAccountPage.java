@@ -1,8 +1,8 @@
 package pages;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
 import models.UserModel;
+import org.openqa.selenium.By;
 
 public class RegistrationAccountPage extends BasePage {
 
@@ -17,24 +17,29 @@ public class RegistrationAccountPage extends BasePage {
     private final By popUpUnderFirstNameField = By.xpath("//li[text()=\"Invalid format.\"]");
     private final By colorFrameBoxOfFirstName = By.xpath("//input[@value=\"James8\"]");
 
+    @Step("Get text from popup under first name field")
     public String getTextFromPopUpUnderField() {
         return find(popUpUnderFirstNameField).getText();
     }
 
+    @Step("Get first name field frame, color")
     public String getFirstNameColor() {
         return waitUntilVisible(colorFrameBoxOfFirstName, 10)
                 .getCssValue("outline-color");
 
     }
 
+    @Step("Click on customer privacy icon")
     public void clickOnCustomerPrivacyIcon() {
         find(customerPrivacyIcon).click();
     }
 
+    @Step("Click on save button")
     public void clickOnSaveButton() {
         waitUntilElementClickable(saveButton, 10).click();
     }
 
+    @Step("Click on social title 'Mr'")
     public void clickOnSocialTitleMr() {
         waitUntilElementPresence(socialTitleMr, 10).click();
     }

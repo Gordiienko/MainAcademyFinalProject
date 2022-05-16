@@ -1,11 +1,13 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
-public class LoginAccountPage extends BasePage{
+public class LoginAccountPage extends BasePage {
     private final By createAccountLink = By.xpath("//a[contains(text(),'No account?')]");
 
-    public void clickCreateAccountLink(){
-        waitUntilElementClickable(createAccountLink,10).click();
+    @Step("Click on 'Create account' link")
+    public void clickCreateAccountLink() {
+        waitUntilElementClickable(createAccountLink, 10).click();
     }
 }

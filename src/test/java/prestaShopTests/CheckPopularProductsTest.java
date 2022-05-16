@@ -7,6 +7,8 @@ import pages.MainPage;
 
 import java.util.List;
 
+import static utils.Formatter.getPrice;
+
 
 public class CheckPopularProductsTest extends BaseTest {
 
@@ -14,16 +16,17 @@ public class CheckPopularProductsTest extends BaseTest {
     public void checkSizeAndValidDateOfPopularProductsSection() {
         MainPage mainPage = new MainPage();
         SoftAssertions softAssertions = new SoftAssertions();
+        mainPage.openMainPage();
         List<ProductModel> products = mainPage.getProductsFromProductsSection();
         softAssertions.assertThat(products.size())
                 .as("In POPULAR PRODUCTS section must be 8 products").isEqualTo(8);
         for (ProductModel product : products) {
             softAssertions.assertThat(product.getName())
-                    .as("sda").isNotNull();
+                    .as("The products must contain the product name").isNotNull();
             softAssertions.assertThat(product.getPrice())
-                    .as("sda").isNotNull();
-            softAssertions.assertThat(product.getPriceValue())
-                    .as("sda").isGreaterThan(0.00);
+                    .as("The products must contain the product price").isNotNull();
+            softAssertions.assertThat(getPrice(product.getPrice()))
+                    .as("The price of each product must be greater than 0.00").isGreaterThan(0.00);
         }
         softAssertions.assertAll();
     }

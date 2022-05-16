@@ -1,6 +1,7 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j;
 import models.ProductModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -8,16 +9,17 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Log4j
 public class MainPage extends BasePage {
 
+    private final String BASE_URL = "https://demo.prestashop.com/";
     private final By textNearTheEmailField = By.xpath("//p[@id=\"block-newsletter-label\"]");
     private final By textUnderEmailField = By.xpath("//div[@class=\"col-md-7 col-xs-12\"]//p");
     private final By subscribeButton = By.xpath("//input[@value=\"Subscribe\"]");
     private final By frameLive = By.id("framelive");
     private final By dropDownLanguageMenuButton = By.xpath("//ul[@class=\"dropdown-menu hidden-sm-down\"]//li");
     private final By languageButton = By.xpath("//span[@class=\"expand-more\"]");
-    private final By ukraineLanguageLocator = By.xpath("//a[@data-iso-code=\"uk\"]");
+    private final By ukraineLanguageLocator = By.xpath("//a[text()='Українська']");
     private final By signInButton = By.xpath("//span[text()=\"Sign in\"]");
     private final By closesMenu = By.id("category-3");
     private final By accessoriesMenu = By.id("category-6");
@@ -25,15 +27,23 @@ public class MainPage extends BasePage {
     private final By subCategoryMenu = By.className("popover");
     private final By productContainer = By.xpath("//article[contains(@class,'product-miniature')]");
     private final By priceDropLink = By.id("link-product-page-prices-drop-1");
-private final By allProductsLink = By.xpath("//a[contains(text(),'All products')]");
+    private final By allProductsLink = By.xpath("//a[contains(text(),'All products')]");
 
-    public AllProductsPage clickOnAllProductsLink(){
+    public void openMainPage() {
+        log.info("Opening main page of the application");
+        getDriver().get(BASE_URL);
+    }
+
+    @Step("Click on 'All products' link")
+    public AllProductsPage clickOnAllProductsLink() {
         WebElement webElement = find(frameLive);
         switchToIframe(webElement);
-        waitUntilElementClickable(allProductsLink,10).click();
+        waitUntilElementClickable(allProductsLink, 10).click();
         return new AllProductsPage();
     }
-    public PriceDropPage clickOnPriceDropLink(){
+
+    @Step("Click on 'Price drop' link")
+    public PriceDropPage clickOnPriceDropLink() {
         WebElement webElement = find(frameLive);
         switchToIframe(webElement);
         waitUntilElementPresence(priceDropLink, 10).click();
@@ -53,20 +63,20 @@ private final By allProductsLink = By.xpath("//a[contains(text(),'All products')
         return products;
     }
 
-    @Step("")
-    public void openClothesCategory() {
+
+    public void hoverMouseClothesCategory() {
         WebElement webElement = find(frameLive);
         switchToIframe(webElement);
         waitUntilElementPresence(closesMenu, 10);
         hoverMouse(closesMenu);
     }
 
-    public void openArtCategory() {
+    public void hoverMouseArtCategory() {
         waitUntilVisible(artMenu, 15);
         hoverMouse(artMenu);
     }
 
-    public void openAccessoriesCategory() {
+    public void hoverMouseAccessoriesCategory() {
         waitUntilVisible(accessoriesMenu, 15);
         hoverMouse(accessoriesMenu);
     }
@@ -88,6 +98,7 @@ private final By allProductsLink = By.xpath("//a[contains(text(),'All products')
 
     @Step("Find [Ukraine language] in drop-down menu")
     public String findUkraineLanguageInDropDownMenu() {
+
         return find(ukraineLanguageLocator).getText();
     }
 

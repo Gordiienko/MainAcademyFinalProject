@@ -1,7 +1,6 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="Demo presta shop tests">
-
+<suite name="Demo presta shop tests" parallel="methods" thread-count="2">
     <listeners>
         <listener class-name="core.MyTestListener"/>
     </listeners>
@@ -34,3 +33,4 @@
 
 
 </suite>
+

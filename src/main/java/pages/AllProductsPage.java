@@ -1,7 +1,7 @@
 package pages;
 
+import io.qameta.allure.Step;
 import models.AllProductModel;
-import models.ProductModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -30,31 +30,33 @@ public class AllProductsPage extends BasePage {
         return products;
     }
 
-
-
+    @Step("Click on 'Sort by' button")
     public void clickOnSortByButton() {
         waitUntilElementClickable(sortByButton, 10).click();
     }
 
-
+    @Step("Click on 'Sort by price Low to High' link")
     public void clickOnSortByPriceLowToHigh() {
         WebElement webElement = find(sortByDropDownMenu);
         switchToIframe(webElement);
         waitUntilElementClickable(sortByPriceLowToHigh, 10).click();
     }
 
+    @Step("Click on 'Sort by name Z to A' link")
     public void clickOnSortByNameZToA() {
         WebElement webElement = find(sortByDropDownMenu);
         switchToIframe(webElement);
         waitUntilElementClickable(sortByNameZToA, 10).click();
     }
 
+    @Step("Click on 'Sort by name A to Z' link")
     public void clickOnSortByNameAToZ() {
         WebElement webElement = find(sortByDropDownMenu);
         switchToIframe(webElement);
         waitUntilElementClickable(sortByNameAToZ, 10).click();
     }
 
+    @Step("Click on 'Sort by price High to Low' link")
     public void clickOnSortByPriceHighToLow() {
         WebElement webElement = find(sortByDropDownMenu);
         switchToIframe(webElement);
