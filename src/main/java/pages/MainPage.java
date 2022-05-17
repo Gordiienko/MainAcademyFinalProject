@@ -34,13 +34,6 @@ public class MainPage extends BasePage {
         getDriver().get(BASE_URL);
     }
 
-    @Step("Click on 'All products' link")
-    public AllProductsPage clickOnAllProductsLink() {
-        WebElement webElement = find(frameLive);
-        switchToIframe(webElement);
-        waitUntilElementClickable(allProductsLink, 10).click();
-        return new AllProductsPage();
-    }
 
     @Step("Click on 'Price drop' link")
     public PriceDropPage clickOnPriceDropLink() {
